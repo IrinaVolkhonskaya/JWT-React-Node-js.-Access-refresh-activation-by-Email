@@ -32,7 +32,15 @@ class UserController {
     }
     async logout(req, res, next) {
         try {
-
+            const { refreshToken } = req.cookies;
+            const token = await userService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            if (token.deletedCount === 1) {
+                console.log("Successfully deleted one document.");
+            } else {
+                console.log("No documents matched the query. Deleted 0 documents.");
+            }
+            return res.json(token);
         } catch (e) {
             next(e);
         }
