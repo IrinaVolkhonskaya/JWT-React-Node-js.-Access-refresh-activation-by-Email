@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import { Context } from './index';
 import { IUser } from './models/IUser';
 import UserService from './services/UserService';
+import Button from '@mui/material/Button';
 
 // @ts-ignore
 const App: FC = () => {
@@ -33,7 +34,7 @@ const App: FC = () => {
     return (
       <div>
         <LoginForm />
-        <button onClick={getUsers}>Получить пользователей</button>
+        <Button style={{ marginTop: "12px" }} variant="contained" onClick={getUsers}>Получить пользователей</Button>
       </div>
     );
   }
@@ -42,11 +43,11 @@ const App: FC = () => {
     <div>
       <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ!'}</h1>
       <h1>{store.user.isActivated ? `Аккаунт подтвержден по почте` : 'ПОДТВЕРДИТЕ АККАУНТ!'}</h1>
-      <button onClick={() => { store.logout() }}>
+      <Button variant="contained" onClick={() => { store.logout() }}>
         Выйти
-      </button>
+      </Button>
       <div>
-        <button onClick={getUsers}>Получить пользователей</button>
+        <Button style={{ marginTop: "12px" }} variant="contained" onClick={getUsers}>Получить пользователей</Button>
       </div>
       {users.map(user =>
         <div key={user.email}>{user.email}</div>
